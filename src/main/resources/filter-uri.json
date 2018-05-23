@@ -1,0 +1,8 @@
+
+{
+  "filterUri": [
+    {"/token/login": "登录接口"},
+    {"/token/test/get": "get测试接口"},
+    {"/token/testGet": "get测试接口"}
+  ]
+}
