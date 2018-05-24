@@ -31,18 +31,7 @@ public class TokenFilter implements Filter {
 
         String authToken = request.getHeader("Authorization");
 
-        StringBuilder str = new StringBuilder();
-        BufferedReader reader = request.getReader();
-        try {
-            while (reader.readLine() != null) {
-                str.append(reader.readLine());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            reader.close();
-        }
-        System.out.println("params: " + str.toString());
+
 //        System.out.println("uri: " + request.getRequestURI());
 //        System.out.println("url: " + request.getRequestURL());
 //        System.out.println("s_path: " + request.getServletPath());
@@ -51,7 +40,7 @@ public class TokenFilter implements Filter {
 
 
         if (TokenUtils.filterUris.contains(request.getRequestURI())) {
-            //chain.doFilter(request, response);
+            chain.doFilter(request, response);
             return;
         }
 
@@ -65,7 +54,6 @@ public class TokenFilter implements Filter {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print("{\"code\":\"403\",\"data\":\"\",\"message\":\"账号未认证！\"}");
-            return;
         }
 
     }

@@ -19,13 +19,14 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String, Object> login(HttpServletResponse response, @RequestBody Map<String, Object> body){
+        Map<String, Object> result = new HashMap<>();
+
         String username = (String) body.get("username");
         String password = (String) body.get("password");
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", body.get("username"));
 
-        Map<String, Object> result = new HashMap<>();
         if ("admin".equals(username) && "admin".equals(password)) {
             result.put("Authorization", tokenUtils().generateToken(claims));
         } else {
